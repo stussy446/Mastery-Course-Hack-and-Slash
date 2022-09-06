@@ -1,5 +1,5 @@
 {
-    "name": "Player Controller",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "Player",
@@ -24,9 +24,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "Attack1",
                     "type": "Button",
                     "id": "3ed1bfce-0191-4f11-b514-2f2ae0ae1adb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack2",
+                    "type": "Button",
+                    "id": "16ecafec-9592-47b3-b7d1-d8f149dfef5f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -206,7 +215,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Attack",
+                    "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -217,7 +226,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Attack",
+                    "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -228,7 +237,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
-                    "action": "Attack",
+                    "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -239,7 +248,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Joystick",
-                    "action": "Attack",
+                    "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -250,7 +259,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Attack",
+                    "action": "Attack1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6026069f-aa94-4a46-85d4-a20bc1c44546",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fae833ca-e9af-4aa8-a23c-6e6057d133e3",
+                    "path": "<DualShockGamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

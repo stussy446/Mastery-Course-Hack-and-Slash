@@ -46,9 +46,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""Attack1"",
                     ""type"": ""Button"",
                     ""id"": ""3ed1bfce-0191-4f11-b514-2f2ae0ae1adb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack2"",
+                    ""type"": ""Button"",
+                    ""id"": ""16ecafec-9592-47b3-b7d1-d8f149dfef5f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -228,7 +237,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Attack"",
+                    ""action"": ""Attack1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -239,7 +248,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Attack"",
+                    ""action"": ""Attack1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -250,7 +259,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Touch"",
-                    ""action"": ""Attack"",
+                    ""action"": ""Attack1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -261,7 +270,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Joystick"",
-                    ""action"": ""Attack"",
+                    ""action"": ""Attack1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -272,7 +281,29 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XR"",
-                    ""action"": ""Attack"",
+                    ""action"": ""Attack1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6026069f-aa94-4a46-85d4-a20bc1c44546"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fae833ca-e9af-4aa8-a23c-6e6057d133e3"",
+                    ""path"": ""<DualShockGamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -862,7 +893,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
-        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_Attack1 = m_Player.FindAction("Attack1", throwIfNotFound: true);
+        m_Player_Attack2 = m_Player.FindAction("Attack2", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -936,14 +968,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
-    private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_Attack1;
+    private readonly InputAction m_Player_Attack2;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
-        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @Attack1 => m_Wrapper.m_Player_Attack1;
+        public InputAction @Attack2 => m_Wrapper.m_Player_Attack2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -959,9 +993,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack1;
+                @Attack1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack1;
+                @Attack1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack1;
+                @Attack2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack2;
+                @Attack2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack2;
+                @Attack2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack2;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -972,9 +1009,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
+                @Attack1.started += instance.OnAttack1;
+                @Attack1.performed += instance.OnAttack1;
+                @Attack1.canceled += instance.OnAttack1;
+                @Attack2.started += instance.OnAttack2;
+                @Attack2.performed += instance.OnAttack2;
+                @Attack2.canceled += instance.OnAttack2;
             }
         }
     }
@@ -1133,7 +1173,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
+        void OnAttack1(InputAction.CallbackContext context);
+        void OnAttack2(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
