@@ -24,13 +24,11 @@ public class PlayerManager : MonoBehaviour
     public void AddPlayer()
     {
         int totalPlayers = FindObjectsOfType<Player>().Length;
-        Debug.Log("Player " + totalPlayers + " has entered the game");
     }
 
     public void LosePlayer()
     {
         int totalPlayers = FindObjectsOfType<Player>().Length;
-        Debug.Log("Player " + totalPlayers + " has left the game");
     }
 
     public void GetAllPlayers()
