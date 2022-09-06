@@ -5,41 +5,45 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerControls))]
 public class Controller : MonoBehaviour
 {
-    private PlayerControls playerControls;
-    public int index;
+    private InputActionAsset inputAsset;
+    private InputActionMap player;
+    private InputAction move;
+
+    public int Index { get; private set; }
 
     private void Awake()
     {
-        playerControls = new PlayerControls();
+        inputAsset = GetComponent<PlayerInput>().actions;
+        player = inputAsset.FindActionMap("Player");
     }
 
     private void Start()
     {
-        index = FindObjectsOfType<Controller>().Length;
+        Index = FindObjectsOfType<Controller>().Length + 1;
     }
 
     private void OnEnable()
     {
-        playerControls.Enable();
-        playerControls.Player.Attack1.performed += Attack1;
-        playerControls.Player.Attack2.performed += Attack2;
+        player.FindAction("Attack1").performed += Attack1;
+        player.FindAction("Attack2").performed += Attack2;
+        move = player.FindAction("Move");
+        player.Enable();
     }
 
     private void OnDisable()
     {
-        playerControls.Disable();
-        playerControls.Player.Attack1.performed -= Attack1;
-        playerControls.Player.Attack2.performed -= Attack2;
+        player.FindAction("Attack1").performed -= Attack1;
+        player.FindAction("Attack2").performed -= Attack2;
+        player.Disable();
     }
 
     private void Attack1(InputAction.CallbackContext obj)
     {
-        Debug.Log("Attacking with Attack1");
+        GetComponent<Transform>().position += Vector3.up;
     }
 
     private void Attack2(InputAction.CallbackContext obj)
     {
-        Debug.Log("Attacking with Attack2");
-
+        GetComponent<Transform>().position += Vector3.down;
     }
 }
