@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +8,7 @@ public class Controller : MonoBehaviour
     private InputActionMap player;
     private InputAction move;
 
+    public Vector2 MoveInputValue { get; private set; }
     public int Index { get; private set; }
 
     private void Awake()
@@ -30,11 +30,27 @@ public class Controller : MonoBehaviour
         player.Enable();
     }
 
+    private void Update()
+    {
+        MoveInputValue = move.ReadValue<Vector2>();
+            
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
     private void OnDisable()
     {
         player.FindAction("Attack1").performed -= Attack1;
         player.FindAction("Attack2").performed -= Attack2;
         player.Disable();
+    }
+
+    private static void Move()
+    {
+        // stuff
     }
 
     private void Attack1(InputAction.CallbackContext obj)

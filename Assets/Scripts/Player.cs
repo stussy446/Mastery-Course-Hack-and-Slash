@@ -3,11 +3,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private UICharacterSelectionMarker uiCharacterSelectionMarker;
-    private Controller controller;
     private UIPlayerText uiPlayerText;
     int playerCount;
 
     public int Index { get; private set;}
+    public Controller Controller { get; private set; }
+
 
     private void Awake()
     {
@@ -17,8 +18,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        controller = GetComponent<Controller>();
-        Index = controller.Index;
+        Controller = GetComponent<Controller>();
+        Index = Controller.Index;
         uiCharacterSelectionMarker.AddPlayer(this);
     }
 

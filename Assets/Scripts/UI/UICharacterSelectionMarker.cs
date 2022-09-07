@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +15,35 @@ public class UICharacterSelectionMarker : MonoBehaviour
 
         if (markerImage != null) { markerImage.gameObject.SetActive(false);}
         if (lockImage != null) { lockImage.gameObject.SetActive(false); }
+
+        MoveToCharacterPanel(menu.LeftPanel);
+    }
+
+
+    private void Update()
+    {
+        if (player != null)
+        {
+            SwitchPanels();
+        }
+
+    }
+
+    private void SwitchPanels()
+    {
+        if (player.Controller.MoveInputValue.x > 0.5f)
+        {
+            MoveToCharacterPanel(menu.RightPanel);
+        }
+        else if (player.Controller.MoveInputValue.x < -0.5f)
+        {
+            MoveToCharacterPanel(menu.LeftPanel);
+        }
+    }
+
+    private void MoveToCharacterPanel(UICharacterSelectionPanel panel)
+    {
+        transform.position = panel.transform.position;
     }
 
     internal void AddPlayer(Player addedPlayer)
