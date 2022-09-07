@@ -35,4 +35,10 @@ public class PlayerManager : MonoBehaviour
     {
         players = FindObjectsOfType<Player>();
     }
+
+    public int GetTotalPlayers()
+    {
+        int totalPlayers = FindObjectsOfType<Player>().Length;
+        return totalPlayers;
+    }
 }

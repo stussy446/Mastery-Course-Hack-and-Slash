@@ -1,23 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private UICharacterSelectionMarker uiCharacterSelectionMarker;
     private Controller controller;
     private UIPlayerText uiPlayerText;
+    int playerCount;
 
     public int Index { get; private set;}
 
     private void Awake()
     {
+        playerCount = PlayerManager.Instance.GetTotalPlayers();
+        SetPlayerNumber();
+
+        controller = GetComponent<Controller>();
+        Index = controller.Index + 1;
+        uiCharacterSelectionMarker.AddPlayer(this);
     }
 
-    public Player(Controller controller)
+    private void SetPlayerNumber()
     {
-        Index = controller.Index;
-        controller = GetComponent<Controller>();
+        if (playerCount == 0)
+        {
+            uiCharacterSelectionMarker =
+                GameObject.FindGameObjectWithTag("Player1 Marker")
+                .GetComponent<UICharacterSelectionMarker>();
+        }
+        else if (playerCount == 1)
+        {
+            uiCharacterSelectionMarker =
+                GameObject.FindGameObjectWithTag("Player2 Marker")
+                .GetComponent<UICharacterSelectionMarker>();
+        }
     }
 
 }
