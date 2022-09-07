@@ -13,21 +13,24 @@ public class Player : MonoBehaviour
     {
         playerCount = PlayerManager.Instance.GetTotalPlayers();
         SetPlayerNumber();
+    }
 
+    private void Start()
+    {
         controller = GetComponent<Controller>();
-        Index = controller.Index + 1;
+        Index = controller.Index;
         uiCharacterSelectionMarker.AddPlayer(this);
     }
 
     private void SetPlayerNumber()
     {
-        if (playerCount == 0)
+        if (playerCount == 1)
         {
             uiCharacterSelectionMarker =
                 GameObject.FindGameObjectWithTag("Player1 Marker")
                 .GetComponent<UICharacterSelectionMarker>();
         }
-        else if (playerCount == 1)
+        else if (playerCount == 2)
         {
             uiCharacterSelectionMarker =
                 GameObject.FindGameObjectWithTag("Player2 Marker")

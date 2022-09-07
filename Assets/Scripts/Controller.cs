@@ -19,7 +19,7 @@ public class Controller : MonoBehaviour
 
     private void Start()
     {
-        Index = FindObjectsOfType<Controller>().Length + 1;
+        Index = FindObjectsOfType<Controller>().Length;
     }
 
     private void OnEnable()
