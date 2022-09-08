@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ public class UICharacterSelectionMarker : MonoBehaviour
     private UICharacterSelectionMenu menu;
     private Player player;
 
+    public bool IsLockedIn { get; private set; }
+    public bool IsPlayerIn { get; internal set; }
+
     private void Awake()
     {
         menu = GetComponentInParent<UICharacterSelectionMenu>();
@@ -18,7 +22,6 @@ public class UICharacterSelectionMarker : MonoBehaviour
 
         MoveToCharacterPanel(menu.LeftPanel);
     }
-
 
     private void Update()
     {
@@ -31,14 +34,28 @@ public class UICharacterSelectionMarker : MonoBehaviour
 
     private void SwitchPanels()
     {
-        if (player.Controller.MoveInputValue.x > 0.5f)
+        if (!IsLockedIn)
         {
-            MoveToCharacterPanel(menu.RightPanel);
+            if (player.Controller.MoveInputValue.x > 0.5f)
+            {
+                MoveToCharacterPanel(menu.RightPanel);
+            }
+            else if (player.Controller.MoveInputValue.x < -0.5f)
+            {
+                MoveToCharacterPanel(menu.LeftPanel);
+            }
+
+            if (player.Controller.Attack1Pressed())
+            {
+                LockCharacter();
+            }
         }
-        else if (player.Controller.MoveInputValue.x < -0.5f)
-        {
-            MoveToCharacterPanel(menu.LeftPanel);
-        }
+    }
+
+    private void LockCharacter()
+    {
+        IsLockedIn = true;
+        lockImage.gameObject.SetActive(true);
     }
 
     private void MoveToCharacterPanel(UICharacterSelectionPanel panel)
@@ -50,6 +67,7 @@ public class UICharacterSelectionMarker : MonoBehaviour
     {
         if (player == null)
         {
+            IsPlayerIn = true;
             player = addedPlayer;
             ActivateImage(markerImage);
         }

@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerControls))]
 public class Controller : MonoBehaviour
 {
-    private InputActionAsset inputAsset;
     private InputActionMap player;
     private InputAction move;
+    private InputActionAsset inputAsset;
+    private bool attack1Pressed = false;
 
     public Vector2 MoveInputValue { get; private set; }
     public int Index { get; private set; }
@@ -55,11 +57,16 @@ public class Controller : MonoBehaviour
 
     private void Attack1(InputAction.CallbackContext obj)
     {
-        GetComponent<Transform>().position += Vector3.up;
+        attack1Pressed = !attack1Pressed;
     }
 
     private void Attack2(InputAction.CallbackContext obj)
     {
-        GetComponent<Transform>().position += Vector3.down;
+    }
+
+
+    internal bool Attack1Pressed()
+    {
+        return attack1Pressed;
     }
 }
