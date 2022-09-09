@@ -8,10 +8,12 @@ public class Controller : MonoBehaviour
     private InputActionMap player;
     private InputAction move;
     private InputActionAsset inputAsset;
-    private bool attack1Pressed = false;
 
     public Vector2 MoveInputValue { get; private set; }
     public int Index { get; private set; }
+    public bool Attack1Pressed { get; private set; }
+    public bool ReadyToStart { get; private set; }
+
 
     private void Awake()
     {
@@ -27,15 +29,18 @@ public class Controller : MonoBehaviour
     private void OnEnable()
     {
         player.FindAction("Attack1").performed += Attack1;
+        player.FindAction("Start").performed += HandleStart;
         player.FindAction("Attack2").performed += Attack2;
         move = player.FindAction("Move");
         player.Enable();
     }
 
+
     private void Update()
     {
+        Attack1Pressed = false;
+        Debug.Log(Attack1Pressed);
         MoveInputValue = move.ReadValue<Vector2>();
-            
     }
 
     private void FixedUpdate()
@@ -57,16 +62,20 @@ public class Controller : MonoBehaviour
 
     private void Attack1(InputAction.CallbackContext obj)
     {
-        attack1Pressed = !attack1Pressed;
+        Attack1Pressed = true;
+        Debug.Log(Attack1Pressed);
     }
+
 
     private void Attack2(InputAction.CallbackContext obj)
     {
     }
 
-
-    internal bool Attack1Pressed()
+    private void HandleStart(InputAction.CallbackContext obj)
     {
-        return attack1Pressed;
+        ReadyToStart = true;
     }
+
+
+
 }

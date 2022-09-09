@@ -45,9 +45,16 @@ public class UICharacterSelectionMarker : MonoBehaviour
                 MoveToCharacterPanel(menu.LeftPanel);
             }
 
-            if (player.Controller.Attack1Pressed())
+            if (player.Controller.Attack1Pressed) 
             {
                 LockCharacter();
+            }
+        }
+        else
+        {
+            if (player.Controller.ReadyToStart)
+            {
+                menu.TryStartGame();
             }
         }
     }
