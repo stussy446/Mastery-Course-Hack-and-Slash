@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,7 +48,7 @@ public class UICharacterSelectionMarker : MonoBehaviour
 
             if (player.Controller.Attack1Pressed) 
             {
-                LockCharacter();
+                StartCoroutine(LockCharacter());
             }
         }
         else
@@ -59,10 +60,12 @@ public class UICharacterSelectionMarker : MonoBehaviour
         }
     }
 
-    private void LockCharacter()
+    private IEnumerator LockCharacter()
     {
-        IsLockedIn = true;
         lockImage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+
+        IsLockedIn = true;
     }
 
     private void MoveToCharacterPanel(UICharacterSelectionPanel panel)

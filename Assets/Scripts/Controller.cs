@@ -29,17 +29,15 @@ public class Controller : MonoBehaviour
     private void OnEnable()
     {
         player.FindAction("Attack1").performed += Attack1;
+        player.FindAction("Attack1").canceled += Attack1Ended;
         player.FindAction("Start").performed += HandleStart;
         player.FindAction("Attack2").performed += Attack2;
         move = player.FindAction("Move");
         player.Enable();
     }
 
-
     private void Update()
     {
-        Attack1Pressed = false;
-        Debug.Log(Attack1Pressed);
         MoveInputValue = move.ReadValue<Vector2>();
     }
 
@@ -51,6 +49,8 @@ public class Controller : MonoBehaviour
     private void OnDisable()
     {
         player.FindAction("Attack1").performed -= Attack1;
+        player.FindAction("Attack1").canceled -= Attack1Ended;
+        player.FindAction("Start").performed -= HandleStart;
         player.FindAction("Attack2").performed -= Attack2;
         player.Disable();
     }
@@ -63,7 +63,11 @@ public class Controller : MonoBehaviour
     private void Attack1(InputAction.CallbackContext obj)
     {
         Attack1Pressed = true;
-        Debug.Log(Attack1Pressed);
+    }
+
+    private void Attack1Ended(InputAction.CallbackContext obj)
+    {
+        Attack1Pressed = false;
     }
 
 
