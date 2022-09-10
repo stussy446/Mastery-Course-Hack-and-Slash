@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,14 +13,24 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
+    }
+
+    private void FixedUpdate()
+    {
         Move();
     }
 
     private void Move()
     {
-        Vector2 movement  = controller.Player.FindAction("Move").ReadValue<Vector2>();
+        Vector2 movement = controller.GetDirection();
         Vector3 direction = new Vector3(movement.x, 0, movement.y);
         transform.position += direction * Time.deltaTime * moveSpeed;
+        if (direction != Vector3.zero)
+        {
+            transform.forward = direction * 360f;
+
+        }
+        
     }
 
 }

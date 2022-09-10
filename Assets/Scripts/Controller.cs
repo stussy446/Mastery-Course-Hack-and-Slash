@@ -56,6 +56,11 @@ public class Controller : MonoBehaviour
         Player.Disable();
     }
 
+    internal Vector2 GetDirection()
+    {
+        return move.ReadValue<Vector2>();
+    }
+
     private static void Move()
     {
         // stuff
