@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player1 Marker
   - Player2 Marker
+  - Wizard
   layers:
   - Default
   - TransparentFX

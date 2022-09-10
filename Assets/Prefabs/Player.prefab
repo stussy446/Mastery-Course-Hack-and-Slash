@@ -390,3 +390,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3970de57344f9441eb5b089826f82c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultCharacterPrefab: {fileID: 5595709278254015947, guid: 2e8d67946da224792a023ffa20a69e8a, type: 3}

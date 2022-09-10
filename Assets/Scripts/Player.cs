@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public int Index { get; private set;}
     public Controller Controller { get; private set; }
 
+    public Character CharacterPrefab { get; set; }
+
 
     private void Awake()
     {
@@ -36,6 +38,15 @@ public class Player : MonoBehaviour
             uiCharacterSelectionMarker =
                 GameObject.FindGameObjectWithTag("Player2 Marker")
                 .GetComponent<UICharacterSelectionMarker>();
+        }
+    }
+
+    public void SpawnCharacter()
+    {
+        if (CharacterPrefab != null)
+        {
+            var character = Instantiate(CharacterPrefab, Vector3.zero, Quaternion.identity);
+            character.SetController(Controller);
         }
     }
 

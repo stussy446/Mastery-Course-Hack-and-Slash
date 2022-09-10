@@ -32,5 +32,6 @@ public class GameManager : MonoBehaviour
         while(operation.isDone == false) { yield return null; }
 
         Debug.Log("Game beginning");
+        PlayerManager.Instance.SpawnPlayerCharacters();
     }
 }

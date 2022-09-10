@@ -71,6 +71,11 @@ public class UICharacterSelectionMarker : MonoBehaviour
     private void MoveToCharacterPanel(UICharacterSelectionPanel panel)
     {
         transform.position = panel.transform.position;
+        if (player != null)
+        {
+            player.CharacterPrefab = panel.CharacterPrefab;
+        }
+
     }
 
     internal void AddPlayer(Player addedPlayer)
@@ -79,6 +84,7 @@ public class UICharacterSelectionMarker : MonoBehaviour
         {
             IsPlayerIn = true;
             player = addedPlayer;
+            player.CharacterPrefab = menu.LeftPanel.CharacterPrefab;
             ActivateImage(markerImage);
         }
     }

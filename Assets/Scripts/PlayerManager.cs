@@ -39,4 +39,13 @@ public class PlayerManager : MonoBehaviour
         int totalPlayers = FindObjectsOfType<Player>().Length;
         return totalPlayers;
     }
+
+    public void SpawnPlayerCharacters()
+    {
+        GetAllPlayers();
+        foreach (var player in players)
+        {
+            player.SpawnCharacter();
+        }
+    }
 }
