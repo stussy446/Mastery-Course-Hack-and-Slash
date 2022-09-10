@@ -4,7 +4,14 @@ using UnityEngine.InputSystem;
 public class Character : MonoBehaviour
 {
     private Controller controller;
+    private Animator animator;
+
     [SerializeField] private float moveSpeed = 5f;
+
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();   
+    }
 
     internal void SetController(Controller controller)
     {
@@ -29,6 +36,11 @@ public class Character : MonoBehaviour
         {
             transform.forward = direction * 360f;
 
+            animator.SetFloat("Speed", direction.magnitude);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
         }
         
     }
