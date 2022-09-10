@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerControls))]
 public class Controller : MonoBehaviour
 {
-    private InputActionMap player;
     private InputAction move;
     private InputActionAsset inputAsset;
 
@@ -13,12 +12,14 @@ public class Controller : MonoBehaviour
     public int Index { get; private set; }
     public bool Attack1Pressed { get; private set; }
     public bool ReadyToStart { get; private set; }
+    public InputActionMap Player { get; private set; }
+    
 
 
     private void Awake()
     {
         inputAsset = GetComponent<PlayerInput>().actions;
-        player = inputAsset.FindActionMap("Player");
+        Player = inputAsset.FindActionMap("Player");
     }
 
     private void Start()
@@ -28,12 +29,12 @@ public class Controller : MonoBehaviour
 
     private void OnEnable()
     {
-        player.FindAction("Attack1").performed += Attack1;
-        player.FindAction("Attack1").canceled += Attack1Ended;
-        player.FindAction("Start").performed += HandleStart;
-        player.FindAction("Attack2").performed += Attack2;
-        move = player.FindAction("Move");
-        player.Enable();
+        Player.FindAction("Attack1").performed += Attack1;
+        Player.FindAction("Attack1").canceled += Attack1Ended;
+        Player.FindAction("Start").performed += HandleStart;
+        Player.FindAction("Attack2").performed += Attack2;
+        move = Player.FindAction("Move");
+        Player.Enable();
     }
 
     private void Update()
@@ -48,11 +49,11 @@ public class Controller : MonoBehaviour
 
     private void OnDisable()
     {
-        player.FindAction("Attack1").performed -= Attack1;
-        player.FindAction("Attack1").canceled -= Attack1Ended;
-        player.FindAction("Start").performed -= HandleStart;
-        player.FindAction("Attack2").performed -= Attack2;
-        player.Disable();
+        Player.FindAction("Attack1").performed -= Attack1;
+        Player.FindAction("Attack1").canceled -= Attack1Ended;
+        Player.FindAction("Start").performed -= HandleStart;
+        Player.FindAction("Attack2").performed -= Attack2;
+        Player.Disable();
     }
 
     private static void Move()
